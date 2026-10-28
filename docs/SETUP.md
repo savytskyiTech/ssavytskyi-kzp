@@ -11,7 +11,7 @@
 | JDK | `java -version` повідомляє, що Java Runtime не знайдено; стандартний каталог JDK порожній |
 | Maven | Команда `mvn` не знайдена в PATH |
 | Maven Wrapper | Буде додано на етапі Maven |
-| GitHub | Підключений акаунт `savytskyiTech`; репозиторій ще не підтверджено |
+| GitHub | Створено Public-репозиторій `savytskyiTech/ssavytskyi-kzp`; гілки завантажено через наявний SSH-доступ |
 
 ## Наступний технічний крок: JDK 21
 
@@ -33,20 +33,25 @@ git --version
 
 ## GitHub
 
-Створити порожній репозиторій `ssavytskyi-kzp` в акаунті `savytskyiTech`.
-Для здачі методичка вимагає Public. Початкові README, `.gitignore` і ліцензію
-на GitHub автоматично не додавати: локальний репозиторій уже матиме свій commit.
+Створено [ssavytskyi-kzp](https://github.com/savytskyiTech/ssavytskyi-kzp)
+в акаунті `savytskyiTech`. Студент явно підтвердив видимість Public.
+Гілки `main` і `codex/lab-01` опубліковано, локальні гілки відстежують їх.
+`origin` використовує наявну SSH-авторизацію:
 
 Після створення прив'язати локальний репозиторій і завантажити гілки:
 
 ```sh
-git remote add origin https://github.com/savytskyiTech/ssavytskyi-kzp.git
-git push -u origin main
-git push -u origin codex/lab-01
+git remote -v
+git branch -vv
 ```
 
-Ці команди виконуються після підтвердження створення віддаленого репозиторію.
-Перевірити `git remote -v`, якщо `origin` уже налаштовано.
+Очікувана адреса `origin`: `git@github.com:savytskyiTech/ssavytskyi-kzp.git`.
+HTTPS-push локально не авторизований; нових ключів чи токенів не створювали.
+Підключення GitHub повернуло 403 при спробі запису, тому початкові Issues
+створено через браузер, а файли завантажено через SSH.
+
+- [#1 — Налаштування лабораторної роботи №1](https://github.com/savytskyiTech/ssavytskyi-kzp/issues/1).
+- [#2 — Maven, Wrapper, тести та JAR](https://github.com/savytskyiTech/ssavytskyi-kzp/issues/2).
 
 ## Codex замість Copilot
 

@@ -1,0 +1,22 @@
+# Java and Maven
+**/target/
+*.class
+hs_err_pid*
+replay_pid*
+
+# IDE and operating system
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local tools, credentials, and generated output
+.tools/
+.env
+.env.*
+!.env.example
+**/output/
+*.log
+
+# Keep Maven Wrapper scripts and .mvn/wrapper/ under version control.

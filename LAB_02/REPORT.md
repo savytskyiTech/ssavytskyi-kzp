@@ -112,25 +112,25 @@ Workflow `.github/workflows/lab02-ci.yml` (**Lab 02 CI**) — копія `lab01-
 
 | Перевірка | Результат |
 | --- | --- |
-| `./mvnw test` (macOS) | `TODO` |
-| `./mvnw verify` (macOS, SpotBugs) | `TODO` |
-| `./mvnw package`, `java -jar target/lab02-2.0.0-all.jar` | `TODO` |
-| CI Lab 02, Ubuntu / Windows / macOS | `TODO`: посилання на запуск |
-| Артефакт JAR | `TODO`: посилання |
-| Git-тег | `TODO` (`v2.0.0` або `v2` — розбіжність документів, див. `AGENTS.md`, § 3) |
+| `./mvnw test` (macOS) | успішно |
+| `./mvnw verify` (macOS, SpotBugs) | не виявлено |
+| `./mvnw package`, `java -jar target/lab02-2.0.0-all.jar` | успішно |
+| CI Lab 02, Ubuntu / Windows / macOS | https://github.com/savytskyiTech/ssavytskyi-kzp/actions/workflows/lab02-ci.yml |
+| Артефакт JAR | Всередині ZIP артефактів - *-java21 |
+| Git-тег |  (`2.0.0`) |
 
 ## 8. GitHub Issues і Pull Request
 
-| № GitHub Issue | Зміна | Перевірка |
+| Зміна | Перевірка |
 | --- | --- | --- |
-| `TODO` `infra` | Тека `LAB_02`, POM `lab02:2.0.0`, workflow Lab 02 CI | `verify`, CI на трьох ОС |
-| `TODO` `feature` | Клас-сутність `VetVisit` | `VetVisitTest` (конструктор) |
-| `TODO` `feature` | Фабрика `VetVisit.fromCsv` | `VetVisitTest` (fromCsv) |
-| `TODO` `feature` | Record `PriceUrgency`, перебудова `Main` | `MainTest`, порівняння з `LAB_01` |
-| `TODO` `feature` | Тести JUnit 5 | 83 випадки |
-| `TODO` `docs` | README, REPORT, javadoc | рев'ю PR |
+|  `infra` | Тека `LAB_02`, POM `lab02:2.0.0`, workflow Lab 02 CI | `verify`, CI на трьох ОС |
+|  `feature` | Клас-сутність `VetVisit` | `VetVisitTest` (конструктор) |
+|  `feature` | Фабрика `VetVisit.fromCsv` | `VetVisitTest` (fromCsv) |
+|  `feature` | Record `PriceUrgency`, перебудова `Main` | `MainTest`, порівняння з `LAB_01` |
+|  `feature` | Тести JUnit 5 | 83 випадки |
+|  `docs` | README, REPORT, javadoc | рев'ю PR |
 
-Гілка: `TODO`. Pull Request: `TODO` (опис із `Closes #N` для всіх Issues).
+Гілка: `java/lab02`. Pull Request: [`LINK`](https://github.com/savytskyiTech/ssavytskyi-kzp/pull/16) 
 
 ## 9. Порівняння поведінки
 
@@ -167,7 +167,7 @@ Workflow `.github/workflows/lab02-ci.yml` (**Lab 02 CI**) — копія `lab01-
 інваріанти, тож помилка типу повідомляється раніше за порушення інваріанта. Для рядків з одним
 дефектом, зокрема всіх тестових випадків `LAB_01`, повідомлення не змінилися.
 
-Порівняння в CI на трьох ОС: `TODO`.
+Порівняння в CI на трьох ОС: `[link](https://github.com/savytskyiTech/ssavytskyi-kzp/actions/workflows/lab02-ci.yml)`.
 
 ## 10. Академічна доброчесність
 
@@ -179,8 +179,7 @@ Workflow `.github/workflows/lab02-ci.yml` (**Lab 02 CI**) — копія `lab01-
 
 допомагав знаходити й виправляти помилки та надавав шаблони коду з прикладами використання фабрик, класів і записів (record).
 
-**Рішення й відхилені варіанти:** builder і повна незмінність «із зірочкою» не робилися (рішення
-студента). Розглядалося збереження порядку повідомлень `LAB_01` для рядків з кількома дефектами;
+**Рішення й відхилені варіанти:** builder і повна незмінність «із зірочкою» не робилися. Розглядалося збереження порядку повідомлень `LAB_01` для рядків з кількома дефектами;
 відхилено, бо для цього фабрика повторювала б перевірки конструктора — це суперечить розподілу
 відповідальності з методички. Різницю задокументовано в розділі 9.
 
@@ -197,7 +196,7 @@ ASCII-локаллю; причина — середовище (на `LAB_01` т�
 [java.util.Objects](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Objects.html),
 [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/).
 
-**Ваша відповідальність:** `TODO` — студент підтверджує правдивість результатів і що може пояснити
+**Ваша відповідальність:** студент підтверджує правдивість результатів і що може пояснити
 код проекту, зокрема конструктори `VetVisit`, `fromCsv`, `PriceUrgency` та один тест.
 
 ## 11. Відповіді на контрольні питання
@@ -205,7 +204,7 @@ ASCII-локаллю; причина — середовище (на `LAB_01` т�
 Методичка вимагає відповіді власними словами. `TODO` — студент заповнює сам.
 
 1. Яку проблему розв'язує клас-сутність порівняно з рядком і паралельними змінними?
-Відповідь: клас єднає пов'язані дані в один об'єктт. Наприклад, тварина, вида, тип візиту, ціна  зберігаються разом, не треба пам'ятати індекси цих полів в рядку.
+ клас єднає пов'язані дані в один об'єктт. Наприклад, тварина, вида, тип візиту, ціна  зберігаються разом, не треба пам'ятати індекси цих полів в рядку.
 2. Що означають `private` і `final` у полях класу?
 private - обмежує доступ до поля з інших класів, а final - означає, що після першого присвоєння полю не можна присвоїти інше значення. 
 3. Що таке інкапсуляція і якій проблемі вона запобігає?

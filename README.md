@@ -2,7 +2,7 @@
 
 Лабораторні роботи з дисципліни «Кросплатформні засоби програмування».
 
-- Варіант: **21** (`LAB_01` — «Ветклініка»).
+- Варіант: **21** («Ветклініка»).
 - ШІ-асистент: **Claude Code** (до 2026-11-01 — OpenAI Codex).
 - Ціль: рівень 2, після його перевірки — рівень 3.
 
@@ -17,7 +17,8 @@
 
 | Робота | Тема | Тека | Стан |
 | --- | --- | --- | --- |
-| № 1 | Ветклініка: розгортання Java-проєкту та базова обробка даних | [`LAB_01/`](LAB_01/) | CI на трьох ОС готовий; предметна програма в роботі |
+| № 1 | Ветклініка: розгортання Java-проєкту та базова обробка даних | [`LAB_01/`](LAB_01/) | Злито в `main` (PR #9) |
+| № 2 | Ветклініка: класи, record та інкапсуляція | [`LAB_02/`](LAB_02/) | Реалізовано; очікує PR і CI |
 
 ## Початок роботи
 
@@ -26,7 +27,8 @@
 3. Працювати невеликими кроками за [GitHub Issues](https://github.com/savytskyiTech/ssavytskyi-kzp/issues);
    шаблони Issues і PR — у `.github/` (з Додатка А методички `LAB_01`).
 
-Перевірки на трьох ОС: [Lab 01 CI](https://github.com/savytskyiTech/ssavytskyi-kzp/actions/workflows/lab01-ci.yml).
+Перевірки на трьох ОС: [Lab 01 CI](https://github.com/savytskyiTech/ssavytskyi-kzp/actions/workflows/lab01-ci.yml),
+[Lab 02 CI](https://github.com/savytskyiTech/ssavytskyi-kzp/actions/workflows/lab02-ci.yml).
 
 ## ШІ-агенти
 

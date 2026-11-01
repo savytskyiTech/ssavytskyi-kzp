@@ -74,7 +74,7 @@ java -jar target/lab01-1.0.0-all.jar --input data/input.csv --output output/repo
 | [#8](https://github.com/savytskyiTech/ssavytskyi-kzp/issues/8) `infra` | Рівень 3: версія, тег, докази CI | `0223a0c` | CI успішний; тег ще потрібен |
 
 Гілки: `main` (захищена), `java/infra` (поточна робота).
-Pull Request `java/infra` → `main` з `Closes #N`: `TODO` (ще не створено).
+Pull Request `java/infra` → `main`: [#9 — LAB 01](https://github.com/savytskyiTech/ssavytskyi-kzp/pull/9), злитий у `main`.
 Окремі bug Issues для виявлених проблем версії, довідки й кодування не створювалися.
 
 ## Тестування, CI і артефакти
@@ -103,6 +103,17 @@ CI [Lab 01 CI](https://github.com/savytskyiTech/ssavytskyi-kzp/actions/workflows
 Артефакти зберігаються 7 днів (`lab01-<os>-java21` — JAR і результати запуску, `lab01-reports-<os>` —
 звіти JUnit і SpotBugs). Переглянуто логи всіх трьох jobs: пройшли тести, SpotBugs,
 запуск упакованої програми й перевірка версії; артефакти доступні.
+
+CI для PR: [запуск № 4](https://github.com/savytskyiTech/ssavytskyi-kzp/actions/runs/41314869240).
+CI після злиття в `main`: [запуск № 5](https://github.com/savytskyiTech/ssavytskyi-kzp/actions/runs/41315063784).
+Обидва запуски успішні.
+
+Артефакти запуску № 5:
+
+- Ubuntu: [JAR і вивід CLI](https://github.com/savytskyiTech/ssavytskyi-kzp/actions/runs/41315063784/artifacts/13085744978), [звіти JUnit і SpotBugs](https://github.com/savytskyiTech/ssavytskyi-kzp/actions/runs/41315063784/artifacts/13085774932).
+- Windows: [JAR і вивід CLI](https://github.com/savytskyiTech/ssavytskyi-kzp/actions/runs/41315063784/artifacts/13087056452), [звіти JUnit і SpotBugs](https://github.com/savytskyiTech/ssavytskyi-kzp/actions/runs/41315063784/artifacts/13087440482).
+- macOS: [JAR і вивід CLI](https://github.com/savytskyiTech/ssavytskyi-kzp/actions/runs/41315063784/artifacts/13087175440), [звіти JUnit і SpotBugs](https://github.com/savytskyiTech/ssavytskyi-kzp/actions/runs/41315063784/artifacts/13085959739).
+
 Git-тег `v1.0.0`: (після злиття в `main`).
 
 ## Академічна доброчесність

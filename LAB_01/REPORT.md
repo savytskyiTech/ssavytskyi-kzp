@@ -32,8 +32,10 @@
 
 ## 5. Інфраструктура
 
-Підготовлено Git, `.gitignore`, `.gitattributes`, `.editorconfig`, `AGENTS.md`
-та описи ролей у `ai/`. Перевірений стан інструментів — у `../docs/SETUP.md`.
+Підготовлено Git, `.gitignore`, `.gitattributes`, `.editorconfig`, правила для ШІ-агентів
+(`AGENTS.md`, `CLAUDE.md`) і ролі в `.claude/agents/` (до переходу на Claude Code — описи
+ролей Codex у `ai/`). Шаблони Issues і PR узято з Додатка А методички.
+Перевірений стан інструментів — у `../docs/SETUP.md`.
 Додано Maven POM: Java 21, UTF-8, JUnit 5.12.2, Surefire 3.5.3,
 SpotBugs 4.9.7.0 у фазі `verify`, Shade 3.6.0 для виконуваного `*-all.jar`.
 Maven Wrapper використовує офіційні scripts Apache 3.3.4 та Maven 3.9.11

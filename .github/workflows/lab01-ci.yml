@@ -2,7 +2,7 @@ name: Lab 01 CI
 
 on:
   push:
-    branches: [main, 'codex/**']
+    branches: [main, 'java/**']
     paths:
       - '.github/workflows/lab01-ci.yml'
       - '.gitattributes'

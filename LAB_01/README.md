@@ -97,7 +97,7 @@ java -jar target/lab01-1.0.0-all.jar --version
 ## GitHub Actions
 
 Workflow: `.github/workflows/lab01-ci.yml`, назва **Lab 01 CI**.
-Push у `main` або `codex/**` і Pull Request до `main` запускають перевірку,
+Push у `main` або `java/**` і Pull Request до `main` запускають перевірку,
 якщо змінено код, дані, build-файли або сам workflow.
 Зміни лише Markdown-документації не запускають повторну збірку.
 

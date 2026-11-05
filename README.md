@@ -18,7 +18,8 @@
 | Робота | Тема | Тека | Стан |
 | --- | --- | --- | --- |
 | № 1 | Ветклініка: розгортання Java-проєкту та базова обробка даних | [`LAB_01/`](LAB_01/) | Злито в `main` (PR #9) |
-| № 2 | Ветклініка: класи, record та інкапсуляція | [`LAB_02/`](LAB_02/) | Злито в `main` (PR #17) |
+| № 2 | Ветклініка: класи, record та інкапсуляція | [`LAB_02/`](LAB_02/) | Реалізовано; очікує PR і CI |
+| № 3 | Ветклініка: спадкування, enum і поліморфізм | [`LAB_03/`](LAB_03/) | Реалізовано; очікує PR і CI |
 
 ## Початок роботи
 
@@ -28,7 +29,8 @@
    шаблони Issues і PR — у `.github/` (з Додатка А методички `LAB_01`).
 
 Перевірки на трьох ОС: [Lab 01 CI](https://github.com/savytskyiTech/ssavytskyi-kzp/actions/workflows/lab01-ci.yml),
-[Lab 02 CI](https://github.com/savytskyiTech/ssavytskyi-kzp/actions/workflows/lab02-ci.yml).
+[Lab 02 CI](https://github.com/savytskyiTech/ssavytskyi-kzp/actions/workflows/lab02-ci.yml),
+[Lab 03 CI](https://github.com/savytskyiTech/ssavytskyi-kzp/actions/workflows/lab03-ci.yml).
 
 ## ШІ-агенти
 

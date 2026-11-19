@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
+import java.util.function.Function;
 
 /** Консольний звіт про візити до ветклініки. */
 public final class Main {
@@ -142,16 +143,27 @@ public final class Main {
      * @throws IOException якщо файл неможливо прочитати
      */
     static List<VetVisit> readRecords(Path input, PrintStream errors) throws IOException {
+        return readCsvRecords(input, errors, VetVisit::fromCsv);
+    }
+
+    /** Читає розширений CSV, зберігаючи порядок коректних рядків і номери помилок. */
+    static List<DetailedVisit> readDetailedRecords(Path input, PrintStream errors) throws IOException {
+        return readCsvRecords(input, errors, DetailedVisit::fromCsv);
+    }
+
+    /** Пропускає хибні рядки й передає кожен коректний результат у порядку файла. */
+    private static <T> List<T> readCsvRecords(
+            Path input, PrintStream errors, Function<String, T> parseRecord) throws IOException {
         List<String> lines = Files.readAllLines(input, StandardCharsets.UTF_8);
-        List<VetVisit> visits = new ArrayList<>();
+        List<T> records = new ArrayList<>();
         for (int i = 0; i < lines.size(); i++) {
             try {
-                visits.add(VetVisit.fromCsv(lines.get(i)));
+                records.add(parseRecord.apply(lines.get(i)));
             } catch (IllegalArgumentException exception) {
                 errors.printf("Рядок %d: %s%n", i + 1, exception.getMessage());
             }
         }
-        return visits;
+        return records;
     }
 
     /**

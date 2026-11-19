@@ -91,16 +91,26 @@ public abstract class VetVisit {
      * @throws IllegalArgumentException якщо структура, число, літерал або інваріант некоректні
      */
     public static VetVisit fromCsv(String line) {
+        return fromCsvFields(csvFields(line, FIELD_COUNT));
+    }
+
+    /** Розділяє CSV-рядок і перевіряє кількість полів для вибраного формату. */
+    static String[] csvFields(String line, int fieldCount) {
         Objects.requireNonNull(line, "рядок не може бути null");
         if (line.isBlank()) {
             throw new IllegalArgumentException("порожній рядок");
         }
         // Ліміт -1 зберігає порожні кінцеві поля, тож "a;b;c;1;" дає 5 полів, а не 4.
         String[] fields = line.split(";", -1);
-        if (fields.length != FIELD_COUNT) {
+        if (fields.length != fieldCount) {
             throw new IllegalArgumentException(
-                    "очікується %d полів, отримано %d".formatted(FIELD_COUNT, fields.length));
+                    "очікується %d полів, отримано %d".formatted(fieldCount, fields.length));
         }
+        return fields;
+    }
+
+    /** Створює візит з перших п'яти полів рядка після перевірки його структури. */
+    static VetVisit fromCsvFields(String[] fields) {
         double price;
         try {
             price = Double.parseDouble(fields[3]);

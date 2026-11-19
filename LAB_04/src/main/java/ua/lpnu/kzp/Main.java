@@ -169,9 +169,8 @@ public final class Main {
     /**
      * Обчислює п'ять показників лише за коректними візитами.
      *
-     * <p>Цикл працює з типом {@link VetVisit} і не перевіряє конкретний підтип:
-     * {@link VetVisit#finalCost()} сам обирає реалізацію {@link RoutineVisit} чи
-     * {@link UrgentVisit}. Новий підтип не вимагатиме змін у цьому методі.
+     * <p>Потоки працюють зі спільним типом {@link VetVisit}. Для підсумкової
+     * вартості {@link VetVisit#finalCost()} викликає реалізацію відповідного підтипу.
      *
      * @param visits візити, створені через {@link VetVisit#fromCsv(String)} або конструктори підтипів
      * @return підсумок: кількість, середня вартість, виторг, кількість ургентних візитів,
@@ -179,17 +178,16 @@ public final class Main {
      * @throws ArithmeticException якщо сума цін виходить за межі double
      */
     static PriceUrgency calculateStatistics(List<VetVisit> visits) {
-        double revenue = 0;
-        double finalRevenue = 0;
-        int urgentCount = 0;
-        for (VetVisit visit : visits) {
-            revenue += visit.getPrice();
-            // Поліморфний виклик: реалізацію обирає фактичний підтип об'єкта.
-            finalRevenue += visit.finalCost();
-            if (visit.isUrgent()) {
-                urgentCount++;
-            }
-        }
+        // Послідовне додавання зберігає порядок і округлення циклу LAB_03.
+        double revenue = visits.stream()
+                .mapToDouble(VetVisit::getPrice)
+                .reduce(0.0, Double::sum);
+        double finalRevenue = visits.stream()
+                .mapToDouble(VetVisit::finalCost)
+                .reduce(0.0, Double::sum);
+        int urgentCount = Math.toIntExact(visits.stream()
+                .filter(VetVisit::isUrgent)
+                .count());
         if (!Double.isFinite(revenue) || !Double.isFinite(finalRevenue)) {
             throw new ArithmeticException("сума цін виходить за межі double");
         }

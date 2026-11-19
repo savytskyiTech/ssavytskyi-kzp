@@ -75,6 +75,17 @@ class MainTest {
     }
 
     @Test
+    void preservesSequentialRoundingOfBothRevenueTotals() {
+        List<VetVisit> records = records("x;y;z;10000000000000000;false",
+                "a;b;c;1;false", "d;e;f;1;false");
+
+        PriceUrgency summary = Main.calculateStatistics(records);
+
+        assertEquals(1.0e16, summary.revenue(), 0.0001);
+        assertEquals(1.0e16, summary.finalRevenue(), 0.0001);
+    }
+
+    @Test
     void rejectsRevenueOverflow() {
         String line = "x;y;z;%s;false".formatted(Double.MAX_VALUE);
         List<VetVisit> records = records(line, line);

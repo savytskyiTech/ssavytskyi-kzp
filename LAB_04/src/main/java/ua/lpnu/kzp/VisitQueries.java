@@ -1,7 +1,10 @@
 package ua.lpnu.kzp;
 
+import java.util.Comparator;
+import java.util.DoubleSummaryStatistics;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /** Потокові запити до розширених записів ветклініки. */
@@ -47,5 +50,39 @@ public final class VisitQueries {
                         DetailedVisit::species,
                         () -> new EnumMap<>(AnimalSpecies.class),
                         Collectors.counting()));
+    }
+
+    /**
+     * Обчислює кількість, суму, середню, мінімальну й максимальну базові вартості.
+     *
+     * @param visits вхідні візити
+     * @return статистика базових вартостей або порожній результат, якщо візитів немає
+     */
+    public static Optional<DoubleSummaryStatistics> priceStatistics(List<DetailedVisit> visits) {
+        DoubleSummaryStatistics statistics = visits.stream()
+                .collect(Collectors.summarizingDouble(record -> record.visit().getPrice()));
+        return statistics.getCount() == 0 ? Optional.empty() : Optional.of(statistics);
+    }
+
+    /**
+     * Вибирає перші візити за спаданням базової вартості та зростанням дати.
+     *
+     * @param visits вхідні візити
+     * @param limit найбільша кількість результатів
+     * @return відсортовані візити, кількість яких не перевищує задану межу
+     * @throws IllegalArgumentException якщо межа від'ємна
+     */
+    public static List<DetailedVisit> topByPrice(List<DetailedVisit> visits, int limit) {
+        if (limit < 0) {
+            throw new IllegalArgumentException("кількість результатів має бути невід'ємною");
+        }
+        Comparator<DetailedVisit> order = Comparator
+                .comparingDouble((DetailedVisit record) -> record.visit().getPrice())
+                .reversed()
+                .thenComparing(DetailedVisit::date);
+        return visits.stream()
+                .sorted(order)
+                .limit(limit)
+                .toList();
     }
 }

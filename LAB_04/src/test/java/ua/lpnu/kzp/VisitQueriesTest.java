@@ -1,6 +1,7 @@
 package ua.lpnu.kzp;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -96,6 +97,25 @@ class VisitQueriesTest {
     }
 
     @Test
+    void findsVisitForUniqueOwner() {
+        assertSame(AT_THRESHOLD, VisitQueries.findFirstByOwner(INPUT, "Власник Б").orElseThrow());
+    }
+
+    @Test
+    void findsFirstOfMultipleVisitsForSameOwner() {
+        List<DetailedVisit> visits = new ArrayList<>(INPUT);
+
+        assertSame(EXPENSIVE_URGENT, VisitQueries.findFirstByOwner(visits, "Власник А").orElseThrow());
+        assertEquals(INPUT, visits);
+    }
+
+    @Test
+    void returnsEmptyWhenNoOwnerMatchesExactly() {
+        assertTrue(VisitQueries.findFirstByOwner(INPUT, "Власник Я").isEmpty());
+        assertTrue(VisitQueries.findFirstByOwner(INPUT, "власник А").isEmpty());
+    }
+
+    @Test
     void returnsEmptyResultsForEmptyInput() {
         List<DetailedVisit> visits = List.of();
 
@@ -104,5 +124,6 @@ class VisitQueriesTest {
         assertTrue(VisitQueries.countBySpecies(visits).isEmpty());
         assertTrue(VisitQueries.priceStatistics(visits).isEmpty());
         assertTrue(VisitQueries.topByPrice(visits, 5).isEmpty());
+        assertTrue(VisitQueries.findFirstByOwner(visits, "Власник А").isEmpty());
     }
 }

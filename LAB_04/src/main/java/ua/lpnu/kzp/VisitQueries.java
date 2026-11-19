@@ -85,4 +85,17 @@ public final class VisitQueries {
                 .limit(limit)
                 .toList();
     }
+
+    /**
+     * Знаходить перший візит із точним збігом власника у вхідному порядку.
+     *
+     * @param visits вхідні візити
+     * @param owner підпис власника для пошуку
+     * @return перший знайдений візит або порожній результат за відсутності збігів
+     */
+    public static Optional<DetailedVisit> findFirstByOwner(List<DetailedVisit> visits, String owner) {
+        return visits.stream()
+                .filter(record -> record.owner().equals(owner))
+                .findFirst();
+    }
 }

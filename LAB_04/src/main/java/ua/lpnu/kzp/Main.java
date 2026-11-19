@@ -19,7 +19,7 @@ public final class Main {
     /**
      * Запускає програму й повертає ОС код завершення.
      *
-     * @param args параметри --help, --version, --input і --output
+     * @param args параметри --help, --version, --demo, --input і --output
      */
     public static void main(String[] args) {
         int exitCode;
@@ -41,6 +41,9 @@ public final class Main {
     static int run(String[] args, PrintStream output, PrintStream errors) {
         Path input = Path.of("data", "input.csv");
         Path destination = Path.of("output", "report.txt");
+        boolean demo = false;
+        boolean customInput = false;
+        boolean customOutput = false;
 
         try {
             for (int i = 0; i < args.length; i++) {
@@ -52,6 +55,10 @@ public final class Main {
                 if ("--version".equals(option)) {
                     output.printf("%s%n", version());
                     return 0;
+                }
+                if ("--demo".equals(option)) {
+                    demo = true;
+                    continue;
                 }
                 if (!"--input".equals(option) && !"--output".equals(option)) {
                     throw new IllegalArgumentException(
@@ -65,8 +72,10 @@ public final class Main {
                 Path path = Path.of(args[++i]);
                 if ("--input".equals(option)) {
                     input = path;
+                    customInput = true;
                 } else {
                     destination = path;
+                    customOutput = true;
                 }
             }
         } catch (IllegalArgumentException exception) {
@@ -78,6 +87,15 @@ public final class Main {
             return 1;
         }
 
+        if (demo) {
+            if (!customInput) {
+                input = Path.of("data", "visits.csv");
+            }
+            if (!customOutput) {
+                destination = Path.of("output", "demo.txt");
+            }
+        }
+
         try {
             // Захищаємо вхідні дані від перезапису, зокрема через символічне посилання.
             if (input.toAbsolutePath().normalize().equals(
@@ -86,9 +104,13 @@ public final class Main {
                 errors.printf("Помилка CLI: вхідний файл і файл звіту мають бути різними%n");
                 return 2;
             }
-            List<VetVisit> visits = readRecords(input, errors);
-            PriceUrgency summary = calculateStatistics(visits);
-            String report = formatReport(summary);
+            String report;
+            if (demo) {
+                report = DemoReport.format(readDetailedRecords(input, errors));
+            } else {
+                List<VetVisit> visits = readRecords(input, errors);
+                report = formatReport(calculateStatistics(visits));
+            }
             writeReport(destination, report);
             output.print(report);
             return 0;
@@ -104,9 +126,11 @@ public final class Main {
         output.printf("Запуск: java -jar target/lab04-4.0.0-all.jar [параметри]%n");
         output.printf("  --help           Показати довідку%n");
         output.printf("  --version        Показати версію та номер збірки%n");
+        output.printf("  --demo           Показати всі запити з data/visits.csv%n");
         output.printf("  --input <файл>   Вхідний CSV, типово data/input.csv%n");
         output.printf("  --output <файл>  Файл звіту, типово output/report.txt%n");
         output.printf("Формат: animal;species;visitType;price;urgent (UTF-8)%n");
+        output.printf("Для --demo додаткові поля: owner;date;diagnosis; звіт output/demo.txt%n");
     }
 
     /**

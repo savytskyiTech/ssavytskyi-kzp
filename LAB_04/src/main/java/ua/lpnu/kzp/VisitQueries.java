@@ -14,6 +14,11 @@ public final class VisitQueries {
     private VisitQueries() {
     }
 
+    /** Повертає поріг фільтра для узгодженого підпису демонстраційного звіту. */
+    static double priceThreshold() {
+        return PRICE_THRESHOLD;
+    }
+
     /**
      * Відбирає візити з базовою вартістю строго понад 600 гривень.
      *
